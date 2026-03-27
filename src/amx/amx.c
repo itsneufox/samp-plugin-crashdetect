@@ -297,6 +297,8 @@ typedef enum {
   OP_SYMTAG,  /* obsolete */
   OP_BREAK,
   /* ----- */
+  OP_PUSH_VARARGS,
+  OP_STACK_DYNAMIC,
   OP_NUM_OPCODES
 } OPCODE;
 
@@ -726,6 +728,11 @@ static int amx_BrowseRelocate(AMX *amx)
     case OP_SWAP_ALT:
     case OP_NOP:
     case OP_BREAK:
+    case OP_STACK_DYNAMIC:
+      break;
+
+    case OP_PUSH_VARARGS:
+      cip+=sizeof(cell);
       break;
 
     case OP_CALL:       /* opcodes that need relocation */
